@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,7 +44,7 @@
 
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <i class="fi-head"></i> <span>My Account</span>
+                                        <i class="fi-head"></i> <span><?php echo $_SESSION['username']?></span>
                                     </a>
 
 
