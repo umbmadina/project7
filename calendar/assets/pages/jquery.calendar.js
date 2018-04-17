@@ -4,11 +4,10 @@
 * Component: Full-Calendar
 */
 
-
+var CalendarApp = null;
 !function($) {
     "use strict";
-
-    var CalendarApp = function() {
+    CalendarApp = function() {
         this.$body = $("body")
         this.$modal = $('#event-modal'),
         this.$event = ('#external-events div.external-event'),

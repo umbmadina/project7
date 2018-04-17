@@ -41,7 +41,7 @@ $(function(){
                 console.log(data)
                 if ( data == 1 ) {
                     alert("Signed In");
-                    location.replace('/calendar/calendar.php');
+                    location.replace('/calendar/calendar.html');
                 } else {
                     alert ("Something went wrong!");
                 }
