@@ -72,17 +72,36 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-
                         <div class="card-box">
                             <div class="row">
                                 <div class="col-lg-3">
                                     <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-lg btn-custom btn-block waves-effect m-t-20 waves-light">
                                         <i class="fi-circle-plus"></i> Add Event
                                     </a>
+                                    <div id="external-events" class="m-t-20">
+                                        <br>
+                                        <p class="text-muted">Drag and drop your event or click in the calendar</p>
+                                        <div class="external-event bg-success" data-class="bg-success">
+                                            <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>New Theme Release
+                                        </div>
+                                        <div class="external-event bg-info" data-class="bg-info">
+                                            <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>My Event
+                                        </div>
+                                        <div class="external-event bg-warning" data-class="bg-warning">
+                                            <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>Meet manager
+                                        </div>
+                                        <div class="external-event bg-purple" data-class="bg-purple">
+                                            <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>Create New theme
+                                        </div>
+                                    </div>
 
-
-
-
+                                    <!-- checkbox -->
+                                    <div class="checkbox checkbox-primary mt-3">
+                                        <input type="checkbox" id="drop-remove">
+                                        <label for="drop-remove">
+                                            Remove after drop
+                                        </label>
+                                    </div>
                                 </div> <!-- end col-->
                                 <div class="col-lg-9">
                                     <div id="calendar"></div>
@@ -109,30 +128,35 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Modal Add Category -->
                         <div class="modal fade" id="add-category" tabindex="-1">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header text-center border-bottom-0 d-block">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title mt-2">Add event</h4>
+                                        <h4 class="modal-title mt-2">Add a category</h4>
                                     </div>
                                     <div class="modal-body p-4">
                                         <form role="form">
                                             <div class="form-group">
-                                                <label class="control-label">Name</label>
+                                                <label class="control-label">Category Name</label>
                                                 <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name"/>
                                             </div>
-                                            <label class="control-label">Date</label>
-                                            <input class="form-control form-white" type="date" name="date" value="">
-                                            <label class="control-label">Time</label>
-                                            <input class="form-control form-white" type="time" name="date" value="">
-                                            <input type="checkbox" name="checkbox" value="" style = "margin-right: 5px; margin-top: 10px">  Surprise party!
+                                            <div class="form-group">
+                                                <label class="control-label">Choose Category Color</label>
+                                                <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                                                    <option value="success">Success</option>
+                                                    <option value="danger">Danger</option>
+                                                    <option value="info">Info</option>
+                                                    <option value="pink">Pink</option>
+                                                    <option value="primary">Primary</option>
+                                                    <option value="warning">Warning</option>
+                                                    <option value="inverse">Inverse</option>
+                                                </select>
+                                            </div>
 
                                         </form>
 
-                                        <div class="text-right" style = "margin-top: 10px;">
+                                        <div class="text-right">
                                             <button type="button" class="btn btn-light waves-effect" data-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-custom ml-1 waves-effect waves-light save-category" data-dismiss="modal">Save</button>
                                         </div>
@@ -140,7 +164,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- END MODAL -->
                     </div>
                     <!-- end col-12 -->
                 </div> <!-- end row -->
