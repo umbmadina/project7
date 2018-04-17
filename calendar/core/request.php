@@ -27,10 +27,34 @@ if (isset($_REQUEST["sign-in"])) {
     $login = $_REQUEST["username"];
     $pass = $_REQUEST["password"];
     $res = $db->signIn($login, $pass);
-    $_SESSION['username'] = $login;
 
     $db->close();
 
     echo $res;
 }
+
+if (isset($_REQUEST["events"])) {
+    $db->connect();
+
+    $events = $_REQUEST["events"];
+
+    $res = $db->getEventsToJS();
+
+    $db->close();
+
+    return $res;
+}
+
+
+if (isset($_REQUEST["save"])) {
+    $db->connect();
+
+    $events = $_REQUEST["save-events"];
+    $res = $db->saveEvents($events);
+
+    $db->close();
+
+    return $res;
+}
+
 

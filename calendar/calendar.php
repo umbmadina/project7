@@ -142,6 +142,10 @@
                                         <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name"/>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label">Enter username in case of surprise</label>
+                                        <input class="form-control form-white" placeholder="Telegram username" type="text" name="surprise-username"/>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label">Choose Category Color</label>
                                         <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
                                             <option value="success">Success</option>

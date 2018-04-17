@@ -8,6 +8,24 @@ function sendRequest(data, callback) {
     });
 }
 
+function appendEvents() {
+    sendRequest(
+        {
+            'events': true
+        },
+        function (data) {
+            var events = JSON.parse(data);
+
+            for(var i = 0; i < events.length; i++){
+                $.CalendarApp.$calendar.fullCalendar('renderEvent', {
+                    title: events[i].title,
+                    start: $.fullCalendar.moment(events[i].eventTime)
+                });
+            }
+        }
+    )
+}
+
 $(function(){
 
     $('.register-submit').click(function() {
@@ -38,10 +56,10 @@ $(function(){
                 'password': $('#password'). val(),
             },
             function (data) {
-                console.log(data)
                 if ( data == 1 ) {
                     alert("Signed In");
-                    location.replace('/calendar/calendar.html');
+                    location.replace('/calendar/calendar.php');
+                    appendEvents();
                 } else {
                     alert ("Something went wrong!");
                 }

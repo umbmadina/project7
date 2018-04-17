@@ -35,7 +35,7 @@ var CalendarApp = null;
             $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
             // is the "remove after drop" checkbox checked?
             if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
+                // if so, remove the element from thпe "Draggable Events" list
                 eventObj.remove();
             }
     },
@@ -136,27 +136,7 @@ var CalendarApp = null;
         var form = '';
         var today = new Date($.now());
 
-        var defaultEvents =  [{
-                title: 'Hey!',
-                start: new Date($.now() + 158000000),
-                className: 'bg-purple'
-            },
-            {
-                title: 'See John Deo',
-                start: today,
-                end: today,
-                className: 'bg-success'
-            },
-            {
-                title: 'Meet John Deo',
-                start: new Date($.now() + 168000000),
-                className: 'bg-info'
-            },
-            {
-                title: 'Buy a Theme',
-                start: new Date($.now() + 338000000),
-                className: 'bg-primary'
-            }];
+        var defaultEvents = null;
 
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({
@@ -175,19 +155,18 @@ var CalendarApp = null;
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar !!!
             eventLimit: true, // allow "more" link when too many events
-            selectable: true,
+            selectable: false,
             drop: function(date) { $this.onDrop($(this), date); },
-            select: function (start, end, allDay) { $this.onSelect(start, end, allDay); },
             eventClick: function(calEvent, jsEvent, view) { $this.onEventClick(calEvent, jsEvent, view); }
-
         });
 
         //on new event
         this.$saveCategoryBtn.on('click', function(){
             var categoryName = $this.$categoryForm.find("input[name='category-name']").val();
             var categoryColor = $this.$categoryForm.find("select[name='category-color']").val();
+            var username = $this.$categoryForm.find("input[name='surprise-username']").val()
             if (categoryName !== null && categoryName.length != 0) {
-                $this.$extEvents.append('<div class="external-event bg-' + categoryColor + '" data-class="bg-' + categoryColor + '" style="position: relative;"><i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>' + categoryName + '</div>')
+                $this.$extEvents.append('<div class="external-event bg-' + categoryColor + '" data-username = "' +username+ '" data-class="bg-' + categoryColor + '" style="position: relative;"><i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>' + categoryName + '</div>')
                 $this.enableDrag();
             }
 
