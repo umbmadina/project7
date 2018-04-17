@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    require_once($_SERVER[DOCUMENT_ROOT]."/cfg/core.php");
+    $db = new myDB();
+    $db->connect();
+    $events = $db->getEvents();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +21,6 @@
 </head>
 
 <body>
-
 <header id="topnav">
     <div class="topbar-main">
         <div class="container-fluid">
@@ -41,7 +48,7 @@
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fi-head"></i> <span>My Account</span>
+                                <i class="fi-head"></i> <span><?php echo $_SESSION['username']?></span>
                             </a>
 
 
@@ -102,6 +109,10 @@
                                     Remove after drop
                                 </label>
                             </div>
+
+                            <a href="#" class="btn btn-lg btn-custom btn-block waves-effect m-t-20 waves-light" onclick="saveEvents()">
+                                <i class="fi-circle-check"></i> Save
+                            </a>
                         </div> <!-- end col-->
                         <div class="col-lg-9">
                             <div id="calendar"></div>
@@ -195,6 +206,33 @@
 <!-- App js -->
 <script src="assets/js/jquery.core.js"></script>
 <script src="assets/js/jquery.app.js"></script>
+<script src="core/requestHelper.js"></script>
+<script>
+    appendEvents();
+    function saveEvents(){
+        var events = $.CalendarApp.$calendar.fullCalendar('clientEvents');
+        var arr = new Array();
+        for(var i = 0; i < events.length; i++){
+            console.log("arr: " + events[i].start.toISOString())
+
+            arr[i] = {
+                title: events[i].title,
+                date: events[i].start.toISOString()
+             }
+            console.log("arr: " + arr[i])
+        }
+
+        sendRequest(
+            {
+                'save': true,
+                'save-events': arr
+            },
+            function (data) {
+                console.log('log'+ data);
+            }
+        );
+    }
+</script>
 
 </body>
 </html>
