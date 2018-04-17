@@ -59,7 +59,8 @@ class myDB
         foreach ($events as &$value){
             $date = $value["date"];
             $title = $value["title"];
-            mysqli_query($this->link, "insert into event values (default, null, '$date', '$title', null)");
+            $username = $value['username'];
+            mysqli_query($this->link, "insert into event values (default, '$username', '$date', '$title', null)");
         }
     }
 }

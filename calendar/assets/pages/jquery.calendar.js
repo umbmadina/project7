@@ -22,22 +22,26 @@ var CalendarApp = null;
     /* on drop */
     CalendarApp.prototype.onDrop = function (eventObj, date) {
         var $this = this;
-            // retrieve the dropped element's stored Event Object
-            var originalEventObject = eventObj.data('eventObject');
-            var $categoryClass = eventObj.attr('data-class');
-            // we need to copy it, so that multiple events don't have a reference to the same object
-            var copiedEventObject = $.extend({}, originalEventObject);
-            // assign it the date that was reported
-            copiedEventObject.start = date;
-            if ($categoryClass)
-                copiedEventObject['className'] = [$categoryClass];
-            // render the event on the calendar
-            $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
-            // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from thпe "Draggable Events" list
-                eventObj.remove();
-            }
+        // retrieve the dropped element's stored Event Object
+        var originalEventObject = eventObj.data('eventObject');
+        var username = eventObj.attr('data-username');
+        var $categoryClass = eventObj.attr('data-class');
+        // we need to copy it, so that multiple events don't have a reference to the same object
+        var copiedEventObject = $.extend({}, originalEventObject);
+        // assign it the date that was reported
+        copiedEventObject.start = date;
+        if ($categoryClass)
+            copiedEventObject['className'] = [$categoryClass];
+        if(username !== ""){
+            copiedEventObject['username'] = username;
+        }
+        // render the event on the calendar
+        $this.$calendar.fullCalendar('renderEvent', copiedEventObject, true);
+        // is the "remove after drop" checkbox checked?
+        if ($('#drop-remove').is(':checked')) {
+            // if so, remove the element from thпe "Draggable Events" list
+            eventObj.remove();
+        }
     },
     /* on click on event */
     CalendarApp.prototype.onEventClick =  function (calEvent, jsEvent, view) {

@@ -217,7 +217,8 @@
 
             arr[i] = {
                 title: events[i].title,
-                date: events[i].start.toISOString()
+                date: events[i].start.toISOString(),
+                username: events[i].username
              }
             console.log("arr: " + arr[i])
         }
