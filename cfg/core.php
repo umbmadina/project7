@@ -60,7 +60,8 @@ class myDB
             $date = $value["date"];
             $title = $value["title"];
             $username = $value['username'];
-            mysqli_query($this->link, "insert into event values (default, '$username', '$date', '$title', null)");
+            $description = $value['className'];
+            mysqli_query($this->link, "insert into event values (default, '$username', '$date', '$title', '$description')");
         }
     }
 }

@@ -19,7 +19,9 @@ function appendEvents() {
             for(var i = 0; i < events.length; i++){
                 $.CalendarApp.$calendar.fullCalendar('renderEvent', {
                     title: events[i].title,
-                    start: $.fullCalendar.moment(events[i].eventTime)
+                    start: $.fullCalendar.moment(events[i].eventTime),
+                    username: events[i].username,
+                    className: events[i].description
                 });
             }
         }
@@ -65,5 +67,13 @@ $(function(){
                 }
             }
         );
+    });
+
+    $('.fc-next-button').click(function(){
+        appendEvents();
+    });
+
+    $('.fc-prev-button').click(function(){
+        appendEvents();
     });
 });

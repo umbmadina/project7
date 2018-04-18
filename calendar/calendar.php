@@ -113,6 +113,9 @@
                             <a href="#" class="btn btn-lg btn-custom btn-block waves-effect m-t-20 waves-light" onclick="saveEvents()">
                                 <i class="fi-circle-check"></i> Save
                             </a>
+                            <a href="#" class="btn btn-lg btn-custom btn-block waves-effect m-t-20 waves-light" onclick="deleteMonth()">
+                                <i class="fi-circle-check"></i> Delete
+                            </a>
                         </div> <!-- end col-->
                         <div class="col-lg-9">
                             <div id="calendar"></div>
@@ -203,6 +206,8 @@
 <script src='../plugins/fullcalendar/js/fullcalendar.min.js'></script>
 <script src="assets/pages/jquery.calendar.js"></script>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- App js -->
 <script src="assets/js/jquery.core.js"></script>
 <script src="assets/js/jquery.app.js"></script>
@@ -211,16 +216,15 @@
     appendEvents();
     function saveEvents(){
         var events = $.CalendarApp.$calendar.fullCalendar('clientEvents');
-        var arr = new Array();
+        var arr = [];
         for(var i = 0; i < events.length; i++){
-            console.log("arr: " + events[i].start.toISOString())
-
             arr[i] = {
                 title: events[i].title,
                 date: events[i].start.toISOString(),
-                username: events[i].username
-             }
-            console.log("arr: " + arr[i])
+                username: events[i].username,
+                className: events[i].className[0]
+             };
+            console.log(arr[i])
         }
 
         sendRequest(
@@ -228,10 +232,32 @@
                 'save': true,
                 'save-events': arr
             },
-            function (data) {
-                console.log('log'+ data);
-            }
+            function () {swal("Good job!", "Your events was successfully saved!", "success");}
         );
+    }
+    function deleteMonth() {
+        swal({
+            title: "Are you sure?",
+            text: "All events will be deleted from the calendar",
+            icon: "warning",
+            buttons: [
+                'No, cancel it!',
+                'Yes, I am sure!'
+            ],
+            dangerMode: true,
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                swal({
+                    title: 'All events was deleted!',
+                    text: '',
+                    icon: 'success'
+                }).then(function() {
+                    $.CalendarApp.$calendar.fullCalendar('removeEvents');
+                });
+            } else {
+                swal("Cancelled", "", "error");
+            }
+        });
     }
 </script>
 
